@@ -1,0 +1,72 @@
+{% extends 'baseAdmin.html.twig' %}
+{%  block title %}{{ title }}{% endblock %}
+{% block body %}
+    <div class="container container-home-dashboard">
+        <div class="row">
+            <h1 class="title">Prestatie van klant: {{ recordClient.name }}</h1>
+        </div>
+        <div class="row">
+            <div class="col-10">
+                <div class="row button-row">
+                    <a href="{{ asset("admin/prestations/delete/#{recordProject.id}") }}">
+                        <button class="btn btn-delete">
+                            <i class="fa fa-trash icon"></i> Delete
+                        </button>
+                    </a>
+                    <a href="{{ path("project.create", {'id': recordTerm.id, 'projectId': recordProject.id}) }}">
+                        <button class="btn btn-edit">
+                            <i class="fa fa-edit icon"></i> Edit
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-flex-start">
+            <div class="col-10 offset-1">
+                <h3 class="body-title">Gegevens Periode</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-10 col-sm-12 card-collection">
+                <div class="body-card-collection">
+                    <div class="row justify-content-flex-start">
+                        <div class="col body-card-container">
+                            <p><span style="color: #029875" >Klant:</span> {{ recordClient.name }}</p>
+                            <p> <span style="color: #029875" >Email klant:</span> {{ recordClient.email }}</p>
+                            <p> <span style="color: #029875" >Werknemer:</span> {{ recordEmployee.name }}</p>
+                            <p> <span style="color: #029875" >Email werknemer:</span> {{ recordEmployee.email }}</p>
+                            <p><span style="color: #029875" >Periode  start datum:</span> {{ recordTerm.startTime|date('Y-m-d') }}</p>
+                            <p> <span style="color: #029875" >Periode eind datum:</span> {{ recordTerm.endTime|date('Y-m-d') }}</p>
+                            <p><span style="color: #029875" >Kost Werknemer per uur:</span> {{ recordClient.hourCost }}</p>
+                            <p> <span style="color: #029875" >Transport kost:</span> {{ recordClient.transportCost }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="margin-top: 50px" class="row justify-content-flex-start">
+            <div class="col-10 offset-1">
+                <h3 class="body-title">Gegevens Prestatie</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-10 col-sm-12 card-collection">
+                <div class="body-card-collection">
+                    <div class="row justify-content-flex-start">
+                        <div class="col body-card-container">
+                            <p><span style="color: #029875" >Datum:</span> {{ recordProject.date|date('Y-m-d') }}</p>
+                            <p> <span style="color: #029875" >Start tijd:</span> {{ recordProject.startTime|date('H:i') }}</p>
+                            <p><span style="color: #029875" >Eind tijd:</span> {{ recordProject.endTime|date('H:i') }}</p>
+                            <p> <span style="color: #029875" >Pauze:</span> {{ recordProject.pause|date('H:i') }}</p>
+                            <p><span style="color: #029875" >Totaal gepresteerde tijd:</span> {{ timeWorked|date('%H:%I') }}</p>
+                            <p> <span style="color: #029875" >Totale prijs voor deze dag:</span> {{ prices[recordProject.id] }}</p>
+                            <p> <span style="color: #029875" >Activiteiten:</span> {{ recordProject.activities }}</p>
+                            <p> <span style="color: #029875" >Materialen:</span> {{ recordProject.materials }}</p>
+                            <p> <span style="color: #029875" >Transport in km:</span> {{ recordProject.transport }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

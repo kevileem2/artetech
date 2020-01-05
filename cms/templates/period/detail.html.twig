@@ -1,0 +1,173 @@
+{% extends 'baseAdmin.html.twig' %}
+{%  block title %}{{ title }}{% endblock %}
+{% block body %}
+    <div class="container container-home-dashboard">
+        <div class="row">
+            <h1 class="title">Periode van klant: {{ recordClient.name }}</h1>
+        </div>
+        <div class="row">
+            <div class="col-10">
+                <div class="row button-row">
+                    <a href="{{ asset("admin/period/detail/#{recordTerm.id}/excel") }}">
+                        <button class="btn btn-excel">
+                            <i class="fa fa-file-excel icon"></i> Excel
+                        </button>
+                    </a>
+                    <a href="{{ asset("admin/period/delete/#{recordTerm.id}") }}">
+                        <button class="btn btn-delete">
+                            <i class="fa fa-trash icon"></i> Delete
+                        </button>
+                    </a>
+                    <a href="{{ asset("admin/period/create/#{recordTerm.id}") }}">
+                        <button class="btn btn-edit">
+                            <i class="fa fa-edit icon"></i> Edit
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-flex-start">
+            <div class="col-10 offset-1">
+                <h3 class="body-title">Gegevens</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-10 col-sm-12 card-collection">
+                <div class="body-card-collection">
+                    <div class="row justify-content-flex-start">
+                        <div class="col body-card-container">
+                            <p><span style="color: #029875" >Klant:</span> {{ recordClient.name }}</p>
+                            <p> <span style="color: #029875" >Email:</span> {{ recordClient.email }}</p>
+                            <p><span style="color: #029875" >Start datum:</span> {{ recordTerm.startTime|date('Y-m-d') }}</p>
+                            <p> <span style="color: #029875" >Eind datum:</span> {{ recordTerm.endTime|date('Y-m-d') }}</p>
+                            <p><span style="color: #029875" >Kost Werknemer per uur:</span> {{ recordClient.hourCost }}</p>
+                            <p> <span style="color: #029875" >Kost transport per km:</span> {{ recordClient.transportCost }}</p>
+                            <p> <span style="color: #029875" >Totale kost prijs van deze periode:</span> {{ 'EUR'|currency_symbol }} {{ totalCostTerm }}</p>
+                            <p> <span style="color: #029875" >Geaccepteerd door klant:</span>
+                            {% if (recordTerm.accepted) %}
+                                <i style="color:#029875" class="fa fa-check icon"></i>
+                            {% else %}
+                                <i style="color:#ed2b33" class="fa fa-times icon"></i>
+                                {% endif %}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="margin-top: 50px;" class="row justify-content-flex-start">
+            <div class="col-9 offset-1">
+                <h3 class="body-title">Alle gepresteerde uren</h3>
+            </div>
+            <div class="col-2">
+                <a href="{{ path('app_period_createproject', {'id': recordTerm.id}) }}">
+                    <button class="btn btn-add">
+                        <i class="fa fa-plus icon"></i> Project
+                    </button>
+                </a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-10 col-sm-12 card-collection">
+                <div class="header-card-collection">
+                    <div class="row">
+                        <div class="col-2">
+                            <div class="row">
+                                <p class="header-text">Werknemer</p>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="row">
+                                <p class="header-text">Tijd gewerkt</p>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="row">
+                                <p class="header-text">Datum</p>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="row">
+                                <p class="header-text">Prijs</p>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="row">
+                                <p class="header-text">Acties</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="body-card-collection">
+                    {% for record in recordProjects %}
+                        <div class="row body-card-item-container">
+                            <div class="col-2">
+                                <div class="row">
+                                    <p class="body-text">{{ employeeNames[record.id] }}</p>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="row">
+                                    <p class="body-text">{{ timeWorked[record.id]|date("%H:%I") }}</p>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="row">
+                                    <p class="body-text">{{ record.date|date('Y-m-d') }}</p>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="row">
+                                    {% if(prices[record.id]) %}
+                                        <p class="body-text">{{ 'EUR'|currency_symbol }} {{ prices[record.id] }}</p>
+                                    {% else %}
+                                        <p class="body-text">{{ 'EUR'|currency_symbol }} 0</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="row">
+                                    <a href="{{ asset("admin/prestations/detail/#{record.id}") }}">
+                                        <button class="btn btn-view">
+                                            <i class="fa fa-eye icon"></i> Bekijk
+                                        </button>
+                                    </a>
+                                    <a href="{{ asset("admin/period/delete/#{recordTerm.id}/project") }}">
+                                        <button class="btn btn-delete">
+                                            <i class="fa fa-trash icon"></i> Delete
+                                        </button>
+                                    </a>
+                                    <a href="{{ asset("admin/period/create/#{recordTerm.id}/project/#{record.id}") }}">
+                                        <button class="btn btn-edit">
+                                            <i class="fa fa-edit icon"></i> edit
+                                        </button>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% if(recordComments) %}
+        <div style="margin-top: 50px;" class="row justify-content-flex-start">
+            <div class="col-9 offset-1">
+                <h3 class="body-title">Opmerking van de klant</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-10 col-sm-12">
+                <div class="body-card-collection">
+                    <div class="row justify-content-flex-start">
+                        <div class="col body-card-container">
+                            {% for comment in recordComments %}
+                                <p><span style="color: #029875" >Opmerking:</span> {{ comment.comment }}</p>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+{% endblock %}

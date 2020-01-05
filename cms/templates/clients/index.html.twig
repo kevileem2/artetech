@@ -1,0 +1,80 @@
+{% extends 'baseAdmin.html.twig' %}
+{%  block title %}Klanten - Artetech{% endblock %}
+{% block body %}
+    <div class="container container-home-dashboard">
+        <div class="row">
+            <h1 class="title">Alle Klanten!</h1>
+        </div>
+        <div class="row">
+            <div class="col-10">
+                <div class="row button-row">
+                    <a href="{{ path('klanten.create') }}">
+                        <button class="btn btn-add">
+                            <i class="fa fa-plus icon icon-button"></i>Klant
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-10 col-sm-12 card-collection">
+                <div class="header-card-collection">
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="row">
+                                <p class="header-text">Naam</p>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="row">
+                                <p class="header-text">Email</p>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="row">
+                                <p class="header-text">Acties</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="body-card-collection">
+                    {% for record in records %}
+                        <div class="row body-card-item-container">
+                            <div class="col-4">
+                                <div class="row">
+
+                                <p class="body-text">{{ record.name }}</p>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="row">
+                                    <p class="body-text">{{ record.email }}</p>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="row">
+
+                                    <a href="{{ asset("admin/klanten/detail/#{record.id}") }}">
+                                        <button class="btn btn-view">
+                                            <i class="fa fa-eye icon"></i> Bekijk
+                                        </button>
+                                    </a>
+                                    <a href="{{ asset("admin/klanten/delete/#{record.id}") }}">
+                                        <button class="btn btn-delete">
+                                            <i class="fa fa-trash icon"></i> Delete
+                                        </button>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="navigation navigation-container">
+                {{ knp_pagination_render(records) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

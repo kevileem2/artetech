@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Aanmelden bij Arte-tech CMS!{% endblock %}</title>
+    {% include 'partials/stylesheet.html.twig' %}
+</head>
+<body>
+{% if error %}
+    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+{% endif %}
+<div class="container">
+    <div class="spacer-height-halfLargeMargin"></div>
+    <div class="row">
+        <div class="col-md-12 col-lg-6">
+            <img class="logo-authentication" src="{{ asset('images/logo.png') }}">
+        </div>
+    </div>
+        <div class="row">
+            <div class="col-md-12 col-lg-6 authentication-form">
+                <div class="spacer-height-smallMargin"></div>
+                <h1 class="h3 mb-3 font-weight-normal authentication-title" align="center">Aanmelden</h1>
+                <form method="post">
+                    <div class="spacer-height-smallMargin"></div>
+                    <div class="row input-row">
+                        <div class="icon-authentication-form">
+                            <i class="fa fa-user icon"></i>
+                        </div>
+                        <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control-authentication" required autofocus>
+                    </div>
+                    <div class="row input-row">
+                        <div class="icon-authentication-form">
+                            <i class="fa fa-envelope icon"></i>
+                        </div>
+                        <input type="password" name="password" id="inputPassword" class="form-control-authentication" required>
+                    </div>
+                    <input type="hidden" name="_csrf_token"
+                           value="{{ csrf_token('authenticate') }}"
+                    >
+                    <div class="checkbox mb-3">
+                        <label>
+                            <input type="checkbox" name="_remember-me"> Remember me
+                        </label>
+                    </div>
+                    <div class="row">
+
+                    <button class="btn btn-lg btn-primary login-button" type="submit">
+                        Aanmelden bij Artetech!
+                    </button>
+                    </div>
+                    <div class="spacer-height-smallMargin"></div>
+                </form>
+            </div>
+        </div>
+
+</div>
+{% include 'partials/scripts.html.twig' %}
+</body>
+</html>

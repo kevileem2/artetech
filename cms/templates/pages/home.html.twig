@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+{%  block title %}Dashboard - Artetech{% endblock %}
+{% block sideNav %}
+    <div id="mySidenav" class="sidenav sideNavClient">
+        {% for period in periodes %}
+            <a href="{{ path('pages.detail', {'id': period.id}) }}">{{ period.startTime|date('Y/m/d') }} - {{ period.endTime|date('Y/m/d') }}</a>
+        {% endfor %}
+    </div>
+{% endblock %}
+{% block body %}
+    <div class="container container-home-dashboard">
+        <div class="row">
+            <h1 class="title">Welkom {{ client.name }} !</h1>
+        </div>
+        <div style="margin-top: 20px;" class="row">
+            {% for period in periodes %}
+            <div class="col-md-12 col-lg-6 col-xl-4">
+                <a class="image-links" href="{{ path('pages.detail', {'id': period.id}) }}">
+                    <header class="header{{ (loop.index0+1)%4 }} hover">
+                        <figure>
+                            <img class="img-card" src="{{ asset('images/clock.jpg') }}" alt="">
+                        </figure>
+                        <section class='hero-header-text'>
+                            <h2>{{ period.startTime|date('Y/m/d') }} - {{ period.endTime|date('Y/m/d') }}</h2>
+                            <h4>Bekijk al je prestaties voor deze periode!</h4>
+                        </section>
+                    </header>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

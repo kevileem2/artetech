@@ -1,0 +1,125 @@
+{% extends 'baseAdmin.html.twig' %}
+{%  block title %}{{ title }}{% endblock %}
+{% block body %}
+    <div class="container container-home-dashboard">
+        <div class="row">
+            <h1 class="title">{{ recordClient.name }}</h1>
+        </div>
+        <div class="row">
+            <div class="col-10">
+                <div class="row button-row">
+                    <a href="{{ asset("admin/klanten/delete/#{recordClient.id}") }}">
+                        <button class="btn btn-delete">
+                            <i class="fa fa-trash icon"></i> Delete
+                        </button>
+                    </a>
+                    <a href="{{ asset("admin/klanten/create/#{recordClient.id}/prices") }}">
+                        <button class="btn btn-edit">
+                            <i class="fa fa-edit icon"></i> Edit
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-flex-start">
+            <div class="col-10 offset-1">
+            <h3 class="body-title">Gegevens</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-10 col-sm-12 card-collection">
+                <div class="body-card-collection">
+                    <div class="row justify-content-flex-start">
+                        <div class="col body-card-container">
+                            <p><span style="color: #029875" >Naam:</span> {{ recordClient.name }}</p>
+                            <p> <span style="color: #029875" >Email:</span>  {{ recordClient.email }}</p>
+                            <p><span style="color: #029875" >Kost Werknemer per uur:</span> {{ recordClient.hourCost }}</p>
+                            <p> <span style="color: #029875" >Kost transport per km:</span>  {{ recordClient.transportCost }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="margin-top: 50px;" class="row justify-content-flex-start">
+            <div class="col-9 offset-1">
+                <h3 class="body-title">Lopende Periodes</h3>
+            </div>
+            <div class="col-2">
+                <a href="{{ asset("admin/klanten/create/#{recordClient.id}/period") }}">
+                    <button class="btn btn-add">
+                        <i class="fa fa-plus icon"></i> Periode
+                    </button>
+                </a>
+            </div>
+        </div>
+            <div class="row">
+                <div class="col-lg-10 col-sm-12 card-collection">
+                    <div class="header-card-collection">
+                        <div class="row">
+                            <div class="col-2">
+                                <div class="row">
+                                    <p class="header-text">Klant</p>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="row">
+                                    <p class="header-text">Start Datum</p>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="row">
+                                    <p class="header-text">Eind Datum</p>
+                                </div>
+                            </div>
+                            <div class="col-4 offset-2">
+                                <div class="row">
+                                    <p class="header-text">Acties</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="body-card-collection">
+                        {% for record in recordTerm %}
+                            <div class="row body-card-item-container">
+                                <div class="col-2">
+                                    <div class="row">
+
+                                        <p class="body-text">{{ recordClient.name }}</p>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="row">
+                                        <p class="body-text">{{ record.startTime|date('Y-m-d') }}</p>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="row">
+                                        <p class="body-text">{{ record.endTime|date('Y-m-d') }}</p>
+                                    </div>
+                                </div>
+                                <div class="col-4 offset-2">
+                                    <div class="row">
+                                        <a href="{{ asset("admin/period/detail/#{record.id}/") }}">
+                                            <button class="btn btn-view">
+                                                <i class="fa fa-eye icon"></i> Bekijk
+                                            </button>
+                                        </a>
+                                        <a href="{{ asset("admin/klanten/delete/#{record.id}/period") }}">
+                                            <button class="btn btn-delete">
+                                                <i class="fa fa-trash icon"></i> Delete
+                                            </button>
+                                        </a>
+                                        <a href="{{ asset("admin/period/create/#{record.id}") }}">
+                                            <button class="btn btn-edit">
+                                                <i class="fa fa-edit icon"></i> Edit
+                                            </button>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+    </div>
+{% endblock %}

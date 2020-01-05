@@ -1,0 +1,103 @@
+{% extends 'baseAdmin.html.twig' %}
+{%  block title %}Periodes - Artetech{% endblock %}
+{% block body %}
+    <div class="container container-home-dashboard">
+        <div class="row">
+            <h1 class="title">Alle Periodes!</h1>
+        </div>
+        <div class="row">
+            <div class="col-10">
+                <div class="row button-row">
+                    <a href="{{ path('period.create') }}">
+                        <button class="btn btn-add">
+                            <i class="fa fa-plus icon icon-button"></i>Periode
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-10 col-sm-12 card-collection">
+                <div class="header-card-collection">
+                    <div class="row">
+                        <div class="col-2">
+                            <div class="row">
+                                <p class="header-text">Klant</p>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="row">
+                                <p class="header-text">Start Date</p>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="row">
+                                <p class="header-text">End Date</p>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                        <div class="row">
+                            <p class="header-text">Price</p>
+                        </div>
+                    </div>
+                        <div class="col-4">
+                            <div class="row">
+                                <p class="header-text">Acties</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="body-card-collection">
+                    {% for record in records %}
+                        <div class="row body-card-item-container">
+                            <div class="col-2">
+                                <div class="row">
+                                    <p class="body-text">{{ clientNames[record.id].name }}</p>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="row">
+                                    <p class="body-text">{{ record.startTime|date('Y-m-d') }}</p>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="row">
+                                    <p class="body-text">{{ record.endTime|date('Y-m-d') }}</p>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="row">
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="row">
+
+                                    <a href="{{ asset("admin/period/detail/#{record.id}") }}">
+                                        <button class="btn btn-view">
+                                            <i class="fa fa-eye icon"></i> Bekijk
+                                        </button>
+                                    </a>
+                                    <a href="{{ asset("admin/period/delete/#{record.id}") }}">
+                                        <button class="btn btn-delete">
+                                            <i class="fa fa-trash icon"></i> Delete
+                                        </button>
+                                    </a>
+                                    <a href="{{ asset("admin/period/create/#{record.id}") }}">
+                                        <button class="btn btn-edit">
+                                            <i class="fa fa-edit icon"></i> edit
+                                        </button>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="navigation navigation-container">
+                {{ knp_pagination_render(records) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

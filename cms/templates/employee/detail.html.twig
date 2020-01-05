@@ -1,0 +1,123 @@
+{% extends 'baseAdmin.html.twig' %}
+{%  block title %}Werknemers - Artetech{% endblock %}
+{% block body %}
+    <div class="container container-home-dashboard">
+        <div class="row">
+            <h1 class="title">{{ record.name }}</h1>
+        </div>
+        <div class="row">
+            <div class="col-10">
+                <div class="row button-row">
+                    <a href="{{ asset("/admin/werknemers/delete/#{record.id}") }}">
+                        <button class="btn btn-delete">
+                            <i class="fa fa-trash icon"></i> Delete
+                        </button>
+                    </a>
+                    <a href="{{ asset("/admin/werknemers/create/#{record.id}") }}">
+                        <button class="btn btn-edit">
+                            <i class="fa fa-edit icon"></i> Edit
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-flex-start">
+            <div class="col-10 offset-1">
+                <h3 class="body-title">Gegevens</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-10 col-sm-12 card-collection">
+                <div class="body-card-collection">
+                    <div class="row justify-content-flex-start">
+                        <div class="col body-card-container">
+                            <p><span style="color: #029875" >Naam:</span> {{ record.name }}</p>
+                            <p> <span style="color: #029875" >Email:</span> {{ record.email }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="margin-top: 50px;" class="row justify-content-flex-start">
+            <div class="col-9 offset-1">
+                <h3 class="body-title">Alle gepresteerde uren</h3>
+            </div>
+        </div>
+    <div class="row">
+    <div class="col-lg-10 col-sm-12 card-collection">
+        <div class="header-card-collection">
+            <div class="row">
+                <div class="col-2">
+                    <div class="row">
+                        <p class="header-text">Klant</p>
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div class="row">
+                        <p class="header-text">Tijd gewerkt</p>
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div class="row">
+                        <p class="header-text">Datum</p>
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div class="row">
+                        <p class="header-text">Prijs</p>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="row">
+                        <p class="header-text">Acties</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="body-card-collection">
+            {% for record in recordProjects %}
+                <div class="row body-card-item-container">
+                    <div class="col-2">
+                        <div class="row">
+                            <p class="body-text">{{ recordClients[record.id].name }}</p>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="row">
+                            <p class="body-text">{{ timeWorked[record.id]|date("%H:%I") }}</p>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="row">
+                            <p class="body-text">{{ record.date|date('Y-m-d') }}</p>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="row">
+                            <p class="body-text">{{ 'EUR'|currency_symbol }} {{ prices[record.id] }}</p>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="row">
+                            <a href="{{ asset("admin/prestations/detail/#{record.id}") }}">
+                                <button class="btn btn-view">
+                                    <i class="fa fa-eye icon"></i> Bekijk
+                                </button>
+                            </a>
+                            <a href="{{ asset("admin/period/delete/#{recordTerm[record.id].id}/project") }}">
+                                <button class="btn btn-delete">
+                                    <i class="fa fa-trash icon"></i> Delete
+                                </button>
+                            </a>
+                            <a href="{{ asset("admin/period/create/#{recordTerm[record.id].id}/project/#{record.id}") }}">
+                                <button class="btn btn-edit">
+                                    <i class="fa fa-edit icon"></i> edit
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

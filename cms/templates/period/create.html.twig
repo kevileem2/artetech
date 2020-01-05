@@ -1,0 +1,65 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+
+{% block body %}
+    <div class="container container-home-dashboard">
+        <div class="row">
+            <h1 class="title">Voeg periode toe voor je klant!</h1>
+        </div>
+        {{ form_start(form, {'attr': {'class': 'addForm form'}}) }}
+        <div class="row form-start">
+            <div class="col-10">
+                <div class="form-group">
+                    {{ form_label(form.client_id, 'Kies Klant') }}
+                    {{ form_widget(form.client_id, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            </div>
+        </div>
+        <div class="row form-start">
+            <div class="col-10">
+                <div class="form-group">
+                    {{ form_label(form.startTime, 'Start datum periode') }}
+                    {{ form_widget(form.startTime, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-10">
+                <div class="form-group">
+                    {{ form_label(form.endTime, 'Eind datum periode') }}
+                    {{ form_widget(form.endTime, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-10 button-container">
+                {{ form_row(form.save, { 'attr': {'class' : 'btn button-create create-button-container my-2 my-sm-0'}}) }}
+            </div>
+        </div>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
+{% block scripts %}
+    <script>
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function() {
+            'use strict';
+            window.addEventListener('load', function() {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+    </script>
+{% endblock %}

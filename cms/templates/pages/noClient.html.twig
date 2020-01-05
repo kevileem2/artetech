@@ -1,0 +1,25 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}'Error 404: Client not found'{% endblock %}
+
+{% block body %}
+    <div class="container container-home-dashboard">
+        <div class="row">
+            <div class="col-12">
+                <h3 class="title">U bent geen klant maar enkel een Admin!</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <p>Begeef u naar de /admin page!</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <a href="{{ path('admin.home') }}">
+                    <button class="btn btn-add">Admin</button>
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

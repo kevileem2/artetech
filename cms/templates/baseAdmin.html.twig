@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% include 'partials/stylesheet.html.twig' %}
+    </head>
+    <body>
+        {% include 'partials/headNavbarAdmin.html.twig' %}
+        {% include 'partials/sideNavAdmin.html.twig' %}
+        {% block body %}
+        {% endblock %}
+        {% block javascripts %}{% include 'partials/scripts.html.twig' %}{% endblock %}
+    </body>
+</html>

@@ -1,0 +1,65 @@
+{% extends 'baseAdmin.html.twig' %}
+{%  block title %}Dashboard - Artetech{% endblock %}
+{% block body %}
+    <div class="container container-home-dashboard">
+        <div class="row">
+            <h1 class="title">Welkom!</h1>
+        </div>
+        <div style="margin-top: 20px;" class="row">
+            <div class="col-md-12 col-lg-6 col-xl-4">
+                <a class="image-links" href="{{ path('werknemers.home') }}">
+                    <header class="header1 hover">
+                        <figure>
+                            <img class="img-card" src="{{ asset('images/werknemers.jpg') }}" alt="">
+                        </figure>
+                        <section class='hero-header-text'>
+                            <h1>Werknemers</h1>
+                            <h4>Bekijk al je werknemers nu!</h4>
+                        </section>
+                    </header>
+                </a>
+            </div>
+            <div class="col-md-12 col-lg-6 col-xl-4">
+                <a class="image-links" href="{{ path('klanten.home') }}">
+                    <header class="header2 hover">
+                        <figure>
+                            <img class="img-card" src="{{ asset('images/clients.jpg') }}" alt="">
+                        </figure>
+                        <section class='hero-header-text'>
+                            <h1>Klanten</h1>
+                            <h4>Bekijk al je Klanten nu!</h4>
+                        </section>
+                    </header>
+                </a>
+            </div>
+        </div>
+        <div style="margin-top: 20px;" class="row">
+            <div class="col-md-12 col-lg-6 col-xl-4">
+                <a class="image-links" href="{{ path('period.home') }}">
+                    <header class="header3 hover">
+                        <figure>
+                            <img class="img-card" src="{{ asset('images/clock.jpg') }}" alt="">
+                        </figure>
+                        <section class='hero-header-text'>
+                            <h1>Periodes</h1>
+                            <h4>Bekijk al lopende periodes nu!</h4>
+                        </section>
+                    </header>
+                </a>
+            </div>
+            <div class="col-md-12 col-lg-6 col-xl-4">
+                <a class="image-links" href="{{ path('prestations.home') }}">
+                    <header class="header4 hover">
+                        <figure>
+                            <img class="img-card" src="{{ asset('images/work_hours.jpg') }}" alt="">
+                        </figure>
+                        <section class='hero-header-text'>
+                            <h1>Gepresteerde uren</h1>
+                            <h4>Bekijk al de gepresteerde uren nu!</h4>
+                        </section>
+                    </header>
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
